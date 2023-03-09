@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Details</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="margin: auto; text-align: center;">Station Details</h1>
+    <div class="station" style="margin-top: 2em; margin-left: 80px; margin-right: 90px;">
+        <table>
+            <tr>
+                <th>Station Id</th>
+                <th>Station Name</th>
+                <th>Station Address</th>
+                <th>Station Price (in Rupees)</th>
+            </tr>
+            <tr>
+                <td>
+                    <%= data.station_id %>
+                </td>
+                <td>
+                    <%= data.station_name %>
+                </td>
+                <td>
+                    <%= data.station_address %>
+                </td>
+                <td>
+                    <%= data.station_price %>
+                </td>
+            </tr>
+        </table>
+        <button id="delete-button">Delete This Station</button>
+    </div>
+    <script>
+        const deleteButton = document.getElementById('delete-button');
+        deleteButton.addEventListener('click', () => {
+            const stationId = deleteButton.dataset.stationId;
+            fetch(`/delete/<%= data.station_id %>`, {
+                method: 'Post',
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Station deleted successfully');
+                        window.location.href = '/';
+                    } else {
+                        throw new Error('Network response was not ok');
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('Error deleting station');
+                });
+        });
+    </script>
+</body>
+
+</html>

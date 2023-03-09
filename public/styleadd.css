@@ -1,0 +1,15 @@
+.form-group label {
+    font-size: 1.2rem;
+}
+
+.custom-btn {
+    background-color: #ff6600;
+    color: #fff;
+    border-color: #ff6600;
+}
+
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
